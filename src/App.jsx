@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Landing from './pages/Index';
 import Wizard   from "./pages/Wizard"
 
+import SideSection from './pages/dashboard/SideSection';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route path="/dashboard" element={<DashBoard />} />
       <Route path="/login" element={<Login />} />
 
+      <Route path="/sidedash" element={<SideSection/>}></Route>
       <Route path="/wizard" element={<Wizard />} />
       <Route path="*" element={<Error />} />
     </Routes>

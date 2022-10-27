@@ -8,6 +8,7 @@ import Error from './pages/Error';
 import Login from './pages/Login';
 import Landing from './pages/Landing';
 
+import SideSection from './pages/dashboard/SideSection';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/landing" element={<Landing />} />
 
+      <Route path="/sidedash" element={<SideSection/>}></Route>
       <Route path="*" element={<Error />} />
     </Routes>
     </ChakraProvider>

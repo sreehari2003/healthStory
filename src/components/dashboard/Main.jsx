@@ -8,6 +8,7 @@ import {
   Input,
   Flex,
   Button,
+  Heading
 } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/react";
 import Card from "./Card";
@@ -35,6 +36,7 @@ function SideSection() {
           }}
         >
           <Input placeholder="search here" color="white" />
+
 
           <Box w="100%">
             <Card

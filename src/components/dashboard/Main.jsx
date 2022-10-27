@@ -34,7 +34,7 @@ function SideSection() {
             },
           }}
         >
-          <Input placeholder="Basic usage" color="white" />
+          <Input placeholder="search here" color="white" />
 
           <Box w="100%">
             <Card
@@ -98,9 +98,11 @@ function SideSection() {
             </Text>
           </Flex>
           <Stack width="full" p="3" pt="3" minH="550px">
-            <Alert borderRadius="md" status="success" variant="solid">
-              Record here . message!
-            </Alert>
+            <Box borderRadius="md" bg="#38A169" variant="solid" p="3  ">
+           
+
+            Hello woe,fmdkgdrkgjfkl
+            </Box>
 
             <Alert borderRadius="md" status="success" variant="solid">
               Record here . message!
@@ -110,6 +112,8 @@ function SideSection() {
               Record here . message!
             </Alert>
           </Stack>
+            <form>
+
           <Flex>
             <Input
               placeholder="Enter prescription"
@@ -118,9 +122,10 @@ function SideSection() {
               bg="white"
               borderRadius="none"
               overflowY="scroll"
-            />
+              />
             <Button   borderRadius="none" h="96px" bg="#415a77" _hover={{color: "white"}}> Add</Button>
           </Flex>
+              </form>
         </Box>
       </WrapItem>
     </flex>

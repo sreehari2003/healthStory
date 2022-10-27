@@ -49,4 +49,31 @@ app.post('/doctor', async (req, res) => {
     res.send(user)
 })
 
+app.get('/user/:id', async (req, res) => {
+    const user = await prisma.user.findUnique({
+      where: { uid : req.params.id },
+    })
+    res.json(user)
+  })
+
+  
+
+  app.post('/user', async (req, res) => {
+    const { name, email, photo, uid  } = req.body
+    const user = await prisma.user.create({
+      data: {
+        name,
+        email,
+        photo,
+        uid,
+        data: {}
+      },
+    })
+    res.json(user)
+  })
+
+
+
+  
+
 const server = app.listen(3000)

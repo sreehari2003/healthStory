@@ -5,6 +5,8 @@ import { theme } from './theme'
 import DashBoard from './pages/DashBoard';
 import Index from './pages/Index';
 import Error from './pages/Error';
+import Login from './pages/Login';
+import Landing from './pages/Landing';
 
 
 function App() {
@@ -14,6 +16,9 @@ function App() {
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/dashboard" element={<DashBoard />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/landing" element={<Landing />} />
+
       <Route path="*" element={<Error />} />
     </Routes>
     </ChakraProvider>

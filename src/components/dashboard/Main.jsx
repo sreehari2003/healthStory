@@ -8,6 +8,7 @@ import {
   Input,
   Flex,
   Button,
+  Heading
 } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/react";
 import Card from "./Card";
@@ -34,6 +35,7 @@ function SideSection() {
             },
           }}
         >
+          <Heading pt={3} pb={3} >Health Story</Heading>
           <Input placeholder="Basic usage" color="white" />
 
           <Box w="100%">

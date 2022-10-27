@@ -3,10 +3,11 @@ import { ChakraProvider } from '@chakra-ui/react'
 import React from 'react'
 import { theme } from './theme'
 import DashBoard from './pages/DashBoard';
-import Index from './pages/Index';
+import Main from './pages/Index';
 import Error from './pages/Error';
 import Login from './pages/Login';
-import Landing from './pages/Landing';
+import Landing from './pages/Index';
+import Wizard   from "./pages/Wizard"
 
 
 function App() {
@@ -14,11 +15,11 @@ function App() {
     <BrowserRouter>
     <ChakraProvider theme={theme}>
     <Routes>
-      <Route path="/" element={<Index />} />
+      <Route path="/" element={<Landing />} />
       <Route path="/dashboard" element={<DashBoard />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/landing" element={<Landing />} />
 
+      <Route path="/wizard" element={<Wizard />} />
       <Route path="*" element={<Error />} />
     </Routes>
     </ChakraProvider>

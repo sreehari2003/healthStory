@@ -1,9 +1,10 @@
 import React from 'react'
+import DashBoard from  "../components/dashboard/Main";
 
-function DashBoard() {
+function DashBoards() {
   return (
-    <div>DashBoard</div>
+    <DashBoard/>
   )
 }
 
-export default DashBoard
+export default DashBoards;

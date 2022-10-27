@@ -3,8 +3,8 @@ import React from "react";
 
 export const Navbar = () => {
   return (
-    <Flex >
-      <Heading fontSize="40px"  mt="5px">HealthStory </Heading>
+    <Flex bg=" transparent" pl="5" py="3">
+      <Heading fontSize="40px" >Hstory </Heading>
     </Flex>
   );
 };

@@ -13,7 +13,7 @@ import {
 import { Text } from "@chakra-ui/react";
 import Card from "./Card";
 
-function SideSection() {
+function SideSection({admin}) {
   return (
     <flex>
       <WrapItem>
@@ -124,6 +124,7 @@ function SideSection() {
               bg="white"
               borderRadius="none"
               overflowY="scroll"
+              isDisabled={admin}
               />
             <Button   borderRadius="none" h="96px" bg="#415a77" _hover={{color: "white"}}> Add</Button>
           </Flex>

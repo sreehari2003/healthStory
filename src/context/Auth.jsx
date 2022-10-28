@@ -1,40 +1,109 @@
-import React, { useState,useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
+import React, { useState, useEffect } from "react";
+import { GoogleAuthProvider ,getAuth,signInWithPopup} from "firebase/auth";
+import axios from "axios";
+import {app } from "./Firebase";
+import { useNavigate} from "react-router-dom"
 
 export const AuthCTX = React.createContext(null);
 
-const supabase = createClient(
-  "https://cjkluqbvfedhpbreebsl.supabase.co/",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNqa2x1cWJ2ZmVkaHBicmVlYnNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjY3MjQyMDAsImV4cCI6MTk4MjMwMDIwMH0.GHgODt7nlJ5KNILxqJMmeQgFpyppvjUL1S3UinAGJSo"
-);
-
 const AuthContext = ({ children }) => {
-    const [user,setUser ] = useState([]);
-   console.log(user);
-  async function signInWithGoogle() {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
+  const navigate = useNavigate();
+  const provider = new GoogleAuthProvider();
+  const [isAUthActive,setAUth] = useState(false);
+  const signAsDoc =async () => {
+    const auth  = getAuth(app);
+    signInWithPopup(auth, provider)
+    .then((result) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      // The signed-in user info.
+      const user = result.user;
+      const data = {
+        name:user.displayName,
+        email:user.email,
+        photo:user.photoURL,
+        uid:user.uid,
+      }
+      axios.post("http://localhost:3000/doctor",data).then(el=>{
+        setAUth(true);
+        if(!el.data.passyear){
+          navigate("/wizard");
+        }else{
+          navigate("/dashboard")
+        }
+      });
+
+      localStorage.setItem("data","doc");
+      localStorage.setItem("uid",user.uid);
+      // ...
+    }).catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      // ...
     });
-    console.log(data);
-  }
-  async function signout() {
-    const { error } = await supabase.auth.signOut();
+ 
+  };
+      
+
+  const pat = ()=> {
+    const auth  = getAuth(app);
+    signInWithPopup(auth, provider)
+    .then((result) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      // The signed-in user info.
+      const user = result.user;
+      const data = {
+        name:user.displayName,
+        email:user.email,
+        photo:user.photoURL,
+        uid:user.uid,
+      }
+      localStorage.setItem("data","doc");
+      localStorage.setItem("uid",user.uid);
+      axios.post("http://localhost:3000/user",data).then(el=>{
+        setAUth(true);
+
+        navigate("/dashboard");
+      });
+      // ...
+    }).catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      // ...
+    });
   }
 
-  useEffect(()=>{
-    (async()=>{
-        const { data } = await supabase
-        .from('users')
-        .select('id, username, avatar_url, website')
-        setUser(data);
-        console.log(data);
-    })()
- 
-  },[])
+  const signOut = ()=>{
+    setAUth(false);
+    localStorage.removeItem("data");
+    localStorage.removeItem("uid");
+    const auth  = getAuth(app);
+    signOut(auth).then(() => {
+       navigate("/");
+      // Sign-out successful.
+    }).catch((error) => {
+      // An error happened.
+    });
+  }
 
   const values = {
-    signInWithGoogle,
-    signout,
+    signAsDoc,
+    signOut,
+    pat,
+    isAUthActive
   };
 
   return <AuthCTX.Provider value={values}>{children}</AuthCTX.Provider>;

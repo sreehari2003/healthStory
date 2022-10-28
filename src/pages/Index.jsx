@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import {
   Box,
   Center,
@@ -10,9 +10,16 @@ import {
 } from "@chakra-ui/react";
 import { Navbar } from "../Layout/components";
 import { useAuth } from "../hooks/useAuth";
+import { useNavigate} from "react-router-dom"
 
 function Landing() {
-  const { signInWithGoogle } = useAuth();
+  const { signAsDoc ,pat,  isAUthActive} = useAuth();
+  const navigate = useNavigate();
+  useEffect(()=>{
+     if(isAUthActive){
+      navigate("/dashboard");
+     }
+  },[isAUthActive])
   return (
     <>
       <Box bg="#cfeeea">
@@ -27,13 +34,13 @@ function Landing() {
             <Flex mt="40px">
               <Box mr="40px">
                 <Text fontSize="xl">For Doctors</Text>
-                <Button colorScheme="teal" mt="10px" onClick={signInWithGoogle}>
+                <Button colorScheme="teal" mt="10px" onClick={signAsDoc}>
                   Click Here
                 </Button>
               </Box>
               <Box>
                 <Text fontSize="xl">For Patients</Text>
-                <Button colorScheme="teal" mt="10px" onClick={signInWithGoogle}>
+                <Button colorScheme="teal" mt="10px" onClick={pat}>
                   Click Here
                 </Button>
               </Box>

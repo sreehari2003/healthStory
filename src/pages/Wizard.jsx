@@ -1,9 +1,14 @@
 import React from "react";
 
-import { Box, Center, FormControl, FormHelperText, FormLabel, Heading, Input, Button, Alert, Text, FormErrorMessage } from "@chakra-ui/react";
+import { Box, Center, FormControl, FormLabel, Heading, Input, Button, Text, FormErrorMessage } from "@chakra-ui/react";
+import React,{useEffect} from "react";
 import { useForm } from "react-hook-form";
 import { Navbar } from "../Layout/components";
 import { Doctor } from "../components/modal";
+import { useNavigate} from "react-router-dom"
+import useAuthState from "../hooks/useDocProtected";
+
+
 
 const Wizard = () => {
 
@@ -14,7 +19,13 @@ const Wizard = () => {
     console.log(data);
 
   }
-  console.log(errors)
+  const navigate = useNavigate();
+  const {doc} = useAuthState()
+  useEffect(()=>{
+    if(!doc ){
+     navigate("/");
+    }
+  },[])
   return (
     <Box p="30px" minH="100vh" >
 
